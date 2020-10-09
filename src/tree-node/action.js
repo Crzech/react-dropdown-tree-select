@@ -9,6 +9,7 @@ class Action extends PureComponent {
     actionData: PropTypes.object,
     onAction: PropTypes.func,
     readOnly: PropTypes.bool,
+    customComponent: PropTypes.element,
   }
 
   static defaultProps = {
@@ -23,13 +24,17 @@ class Action extends PureComponent {
   }
 
   render() {
-    const { title, className, text, readOnly } = this.props
+    const { title, className, text, readOnly, customComponent } = this.props
 
-    return (
-      <i title={title} className={className} onClick={!readOnly ? this.handleClick : undefined}>
-        {text}
-      </i>
-    )
+    if (customComponent) {
+      return customComponent
+    } else {
+      return (
+        <i title={title} className={className} onClick={!readOnly ? this.handleClick : undefined}>
+          {text}
+        </i>
+      )
+    }
   }
 }
 
